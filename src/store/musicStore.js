@@ -15,8 +15,6 @@ export const useMusic = create((set) => ({
     }
   },
   setCurrentSong: (song) => {
-    set({
-      currentMusic: song
-    });
+    set({ currentMusic: song });
   }
-}))
+}));
