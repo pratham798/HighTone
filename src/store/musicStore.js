@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useMusic = create((set) => ({
+export const useMusicStore = create((set) => ({
   songs: [],
   currentMusic: {},
   isError: false,
@@ -8,8 +8,9 @@ export const useMusic = create((set) => ({
 
   fetchMusic: async() => {
     try {
-      const res = await ('https://cms.samespace.com/items/songs');
-      set({songs: res});
+      const res = await fetch('https://cms.samespace.com/items/songs');
+      const musicData = await res.json();
+      set({songs: musicData.data});
     } catch (error) {
       set({isError: true});
     }
