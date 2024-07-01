@@ -10,7 +10,7 @@ const Playlist = ({songs, isLoading}) => {
   const filterSongList = (action) => setFilterSongs('top_track', top_track => top_track === action);
 
   return (
-    <section className='flex flex-col gap-8 pt-8 max-lg: p-7'>
+    <section className='flex flex-col gap-8 pt-8 max-lg: p-7 max-lg:order-2 lg:max-w-[27rem] min-w-80 flex-1'>
       <header className='flex flex-row gap-10 text-slate-100 font-extrabold text-2xl'>
         <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>filterSongList(null)}>
             For You
@@ -19,8 +19,7 @@ const Playlist = ({songs, isLoading}) => {
           Top Tracks
         </span>
       </header>
-      <section className='flex flex-row gap-5 bg-white bg-opacity-10 cursor-pointer p-2 rounded-md w-[27rem] 
-        max-lg:w-full font-medium'>
+      <section className='flex flex-row gap-5 bg-white bg-opacity-10 cursor-pointer p-2 rounded-md font-medium'>
         <SearchSong songs={songs} />
         <img className='size-8 inline-block ml-auto mr-2' src={SearchIcon} alt='cover'/>
       </section>

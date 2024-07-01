@@ -3,7 +3,7 @@ import { create } from "zustand";
 export const useMusicStore = create((set) => ({
   songs: [],
   filteredSongs: [],
-  currentMusic: {},
+  currentMusic: null,
   isError: false,
   isLoading: true,
   currBackground: '#000000',

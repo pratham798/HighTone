@@ -16,7 +16,7 @@ const SearchSong = ({songs}) => {
   
 
   return (
-    <form className='my-auto ml-2 w-full'>
+    <form className='my-auto ml-2 w-full' onSubmit={(e)=> e.preventDefault()}>
       <input
         value={searchSong}
         type='text' 
