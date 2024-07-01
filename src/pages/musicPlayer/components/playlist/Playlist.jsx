@@ -6,25 +6,31 @@ const Playlist = ({songs}) => {
   const updateSongList = (action) => setTopSongs(action);
   useEffect(() => {
     topSongs && songs.filter((song) => song.top_track===true)
-  })
+  }, [songs, topSongs])
 
   return (
-    <section className='flex flex-row gap-8'>
-      <header className='flex flex-row gap-8 text-slate-50 font-extrabold text-2xl pt-8'>
-        <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>updateSongList(true)}>For You</span>
-        <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>updateSongList(false)}>Top Tracks</span>
+    <section className='flex flex-col gap-8'>
+      <header className='flex flex-row gap-10 text-slate-100 font-extrabold text-2xl pt-8 max-lg: p-7'>
+        <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>updateSongList(true)}>
+            For You
+        </span>
+        <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>updateSongList(false)}>
+          Top Tracks
+        </span>
       </header>
       <section> Search </section>
-      <section>
+      <section className='flex flex-col gap-4'>
         {songs?.map((song) => {
           return(
             <Song 
-            key={song.id}
-            name={song.name}
-            url={song.url}
-            accent={song.accent}
-            cover={song.cover}
-            artist={song.artist}/>
+              key={song.id}
+              id={song.id}
+              name={song.name}
+              url={song.url}
+              accent={song.accent}
+              cover={song.cover}
+              artist={song.artist}
+            />
           );
         })}
       </section>
