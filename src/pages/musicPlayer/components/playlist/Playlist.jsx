@@ -21,7 +21,7 @@ const Playlist = ({songs, isLoading}) => {
       </header>
       <section className='flex flex-row gap-5 bg-white bg-opacity-10 cursor-pointer p-2 rounded-md w-[27rem] 
         max-lg:w-full font-medium'>
-        <SearchSong songs={songs} /> 
+        <SearchSong songs={songs} />
         <img className='size-8 inline-block ml-auto mr-2' src={SearchIcon} alt='cover'/>
       </section>
       <section className='flex flex-col gap-4'>
