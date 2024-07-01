@@ -9,8 +9,8 @@ const Playlist = ({songs}) => {
   }, [songs, topSongs])
 
   return (
-    <section className='flex flex-col gap-8'>
-      <header className='flex flex-row gap-10 text-slate-100 font-extrabold text-2xl pt-8 max-lg: p-7'>
+    <section className='flex flex-col gap-8 pt-8 max-lg: p-7'>
+      <header className='flex flex-row gap-10 text-slate-100 font-extrabold text-2xl'>
         <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>updateSongList(true)}>
             For You
         </span>

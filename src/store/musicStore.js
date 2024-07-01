@@ -6,6 +6,7 @@ export const useMusicStore = create((set) => ({
   isError: false,
   isLoading: true,
   currBackground: '#000000',
+  currSongBanner: null,
 
   fetchMusic: async() => {
     try {
@@ -18,5 +19,8 @@ export const useMusicStore = create((set) => ({
   },
   setCurrentSong: (song) => {
     set({ currentMusic: song, currBackground: song.accent });
-  }
+  },
+  setCurrentSongBanner: (songBanner) => {
+    set({currSongBanner: songBanner});
+  },
 }));
