@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export const useMusicStore = create((set) => ({
   songs: [],
+  filteredSongs: [],
   currentMusic: {},
   isError: false,
   isLoading: true,
@@ -23,4 +24,7 @@ export const useMusicStore = create((set) => ({
   setCurrentSongBanner: (songBanner) => {
     set({currSongBanner: songBanner});
   },
+  setFilterSongs: (filterValue, filterCondition) => set((state) => ({
+    filteredSongs: state.songs.filter(song => filterCondition(song[filterValue]))
+  })),
 }));

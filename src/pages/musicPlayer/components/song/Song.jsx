@@ -30,7 +30,7 @@ const Song = ({id, name, url, accent, cover, artist}) => {
 
   return (
     <section className={`flex flex-row gap-5 cursor-pointer p-3 ${id===currentMusic?.id && 'bg-white bg-opacity-10'}
-    hover:bg-white hover:bg-opacity-10 rounded-md transition-all w-[27rem] max-lg:w-full -ml-4 font-medium`} 
+    hover:bg-white hover:bg-opacity-10 rounded-md transition-all w-[27rem] max-lg:w-full -ml-3 font-medium`} 
       onClick={() => updateCurrentSong()}>
       <section className='bg-slate-300 bg-opacity-10 rounded-3xl w-12 h-12 overflow-hidden'>
         {songCover && <img className='w-full h-full flex-shrink-0' src={songCover} alt='cover'/>}

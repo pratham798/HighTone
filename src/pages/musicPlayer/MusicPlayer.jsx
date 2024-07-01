@@ -5,13 +5,14 @@ import Playlist from './components/playlist';
 import HeaderNav from '../../components/headerNav';
 
 const MusicPlayer = () => {
-  const { songs, currMusic, isError, isLoading, fetchMusic, currBackground } = useMusicStore((state)=>({
+  const { songs, currMusic, isError, isLoading, fetchMusic, currBackground, filteredSongs } = useMusicStore((state)=>({
     songs: state.songs,
     currentMusic: state.currMusic,
     isError: state.isError,
     isLoading: state.isLoading,
     fetchMusic: state.fetchMusic,
     currBackground: state.currBackground,
+    filteredSongs: state.filteredSongs,
   }), shallow);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const MusicPlayer = () => {
     <section style={gradientStyle} className='flex flex-row max-lg:flex-col'>
       <HeaderNav/>
       <section className='flex flex-row gap-10 max-lg:flex-col lg:gap-8'>
-        <Playlist songs={songs} isLoading={isLoading} isError={isError}/>
+        <Playlist songs={filteredSongs.length ? filteredSongs : songs} isLoading={isLoading} isError={isError}/>
         <>Curr Song</>
       </section>
     </section>
