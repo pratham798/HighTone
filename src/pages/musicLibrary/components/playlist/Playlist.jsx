@@ -26,18 +26,7 @@ const Playlist = ({songs, isLoading}) => {
       </section>
       <section className='flex flex-col gap-4'>
         {isLoading && (Array.from({ length: 7 }, (_, index) => <LoadingState key={index} />))}
-        {songs?.map((song) => {
-          return(
-            <Song 
-              key={song.id}
-              id={song.id}
-              name={song.name}
-              url={song.url}
-              accent={song.accent}
-              cover={song.cover}
-              artist={song.artist}
-            />
-        )})}
+        {songs?.map((song) => <Song key={song.id} song={song}/>)}
       </section>
     </section>
   )

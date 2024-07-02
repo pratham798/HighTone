@@ -4,9 +4,8 @@ import { shallow } from "zustand/shallow";
 import MusicPlayer from '../../../../components/musicPlayer/MusicPlayer';
 
 const SongPlay = () => {
-  const { currentSongBanner, currentMusic} = useMusicStore((state)=>({
+  const { currentMusic} = useMusicStore((state)=>({
     currentMusic: state.currentMusic,
-    currentSongBanner: state.currSongBanner,
   }), shallow);
 
   return (
@@ -18,7 +17,7 @@ const SongPlay = () => {
         <span className='text-slate-400 text-sm'>{currentMusic?.artist}</span>
       </header>
       <section className='bg-slate-300 bg-opacity-10 sm:size-96 max-sm:size-[19rem] overflow-hidden rounded-lg max-lg:m-auto max-s'>
-        {currentMusic && (<img className = 'h-full w-full' src={currentSongBanner} alt='banner'/>)}
+        {currentMusic && (<img className = 'h-full w-full' src={currentMusic.banner} alt='banner'/>)}
       </section>
       <MusicPlayer />
     </section>

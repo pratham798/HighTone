@@ -6,13 +6,12 @@ import HeaderNav from '../../components/headerNav';
 import SongPlay from './components/songPlay';
 
 const MusicLibrary = () => {
-  const { songs, currentMusic, isError, isLoading, fetchMusic, currBackground, filteredSongs } = useMusicStore((state)=>({
+  const { songs, currentMusic, isError, isLoading, fetchMusic, filteredSongs } = useMusicStore((state)=>({
     songs: state.songs,
     currentMusic: state.currentMusic,
     isError: state.isError,
     isLoading: state.isLoading,
     fetchMusic: state.fetchMusic,
-    currBackground: state.currBackground,
     filteredSongs: state.filteredSongs,
   }), shallow);
 
@@ -21,7 +20,7 @@ const MusicLibrary = () => {
   },[fetchMusic]);
 
   const gradientStyle = {
-    background: `linear-gradient(125deg, ${currBackground} -100%, black 110%)`,
+    background: `linear-gradient(125deg, ${currentMusic?.accent} -100%, black 110%)`,
   };
 
   return (
