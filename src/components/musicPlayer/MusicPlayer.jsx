@@ -1,13 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMusicStore } from '../../store/musicStore';
 import { shallow } from "zustand/shallow";
-
-import PlayIcon from '../../assets/play.svg';
-import PauseIcon from '../../assets/pause.svg';
-import ChangeIcon from '../../assets/changeSong.svg';
-import SpeakerIcon from '../../assets/speaker.svg';
-import OptionIcon from '../../assets/options.svg';
-import MuteIcon from '../../assets/mute.svg';
+import OperateSong from './Controls/OperateSong';
+import Mute from './Controls/Mute';
+import Shuffle from './Controls/Shuffle';
+import NextSong from './Controls/NextSong';
+import PrevSong from './Controls/PrevSong';
 
 
 const MusicPlayer = () => {
@@ -21,6 +19,7 @@ const MusicPlayer = () => {
     muteUnmuteSong: state.muteUnmuteSong,
   }), shallow);
   const audioElem = useRef();
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if(playSong) audioElem.current.play();
@@ -35,40 +34,31 @@ const MusicPlayer = () => {
     playPauseSong(!playSong)
     playSong ? audioElem.current.pause() : audioElem.current.play();
   }
-
   const muteSong = () => {
     audioElem.current.muted = !muted;
     muteUnmuteSong(!muted);
   }
-
   const skipSong = (action) => changeSong(action);
+  const updateTime = () => {
+    const duration = audioElem.current.duration;
+    const ct = audioElem.current.currentTime;
+    setProgress(ct / duration * 100);
+  }
 
   return (
     <section>
-      <audio src={currentMusic?.url} ref={audioElem}/>
+      <audio src={currentMusic?.url} ref={audioElem} onTimeUpdate={currentMusic && updateTime}/>
+      <section className='bg-slate-300 w-full h-[0.3rem] bg-opacity-10 mb-2'>
+        <div className='bg-slate-50 h-1 transition-all' style={{width: `${progress+"%"}`}} />
+      </section>
       <section className='flex flex-row gap-6 justify-between px-2 items-center'>
-        <span className='bg-slate-300 bg-opacity-10 rounded-3xl w-10 h-10 overflow-hidden cursor-pointer active:translate-y-1' 
-          onClick={() => currentMusic && skipSong(Math.floor(Math.random() * songs.length))}>
-          <img className='h-5 w-5 m-[0.6rem]' src={OptionIcon} alt='voice'/>
-        </span>
+        <Shuffle currentMusic={currentMusic} skipSong={skipSong} songs={songs}/>
         <section className='flex flex-row gap-3 items-center'>
-          <span className='hover:bg-slate-300 hover:bg-opacity-10 rounded-3xl w-10 h-10 overflow-hidden cursor-pointer 
-          active:translate-y-1' onClick={() => currentMusic && skipSong(-1)}>
-            <img className='h-5 w-5 m-[0.6rem] rotate-180' src={ChangeIcon} alt='back'/>
-          </span>
-          <span className='rounded-3xl w-14 h-14 overflow-hidden cursor-pointer active:translate-y-1' 
-            onClick={() => currentMusic && playPause()}>
-            <img className='h-full w-full' src={playSong ? PauseIcon: PlayIcon} alt='play-pause'/>
-          </span>
-          <span className='hover:bg-slate-300 hover:bg-opacity-10 rounded-3xl w-10 h-10 overflow-hidden cursor-pointer 
-          active:translate-y-1' onClick={() => currentMusic && skipSong(1)}>
-            <img className='h-5 w-5 m-[0.6rem]' src={ChangeIcon} alt='next'/>
-          </span>
+          <PrevSong currentMusic={currentMusic} skipSong={skipSong} />
+          <OperateSong currentMusic={currentMusic} playPause={playPause} playSong={playSong} />
+          <NextSong currentMusic={currentMusic} skipSong={skipSong} />
         </section>
-        <span className='bg-slate-300 bg-opacity-10 rounded-3xl w-10 h-10 overflow-hidden cursor-pointer active:translate-y-1'
-          onClick={() => currentMusic && muteSong()}>
-          <img className='h-5 w-5 m-[0.6rem]' src={muted ? MuteIcon : SpeakerIcon} alt='voice'/>
-        </span>
+        <Mute currentMusic={currentMusic} muteSong={muteSong} muted={muted}/>
       </section>
     </section>
   )
