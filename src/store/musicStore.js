@@ -7,9 +7,7 @@ export const useMusicStore = create((set, get) => ({
   currentMusic: null,
   isError: false,
   isLoading: true,
-  currBackground: '#000000',
-  currSongBanner: null,
-  playSong: true,
+  playSong: false,
 
   fetchMusic: async() => {
     try {
@@ -31,10 +29,7 @@ export const useMusicStore = create((set, get) => ({
     }
   },
   setCurrentSong: (song) => {
-    set({ currentMusic: song, currBackground: song.accent });
-  },
-  setCurrentSongBanner: (songBanner) => {
-    set({currSongBanner: songBanner});
+    set({ currentMusic: song, playSong: true });
   },
   setFilterSongs: (filterValue, filterCondition) => set((state) => ({
     filteredSongs: state?.songs?.filter(song => filterCondition(song[filterValue]))
@@ -45,9 +40,9 @@ export const useMusicStore = create((set, get) => ({
   changeSong: (action) => {
     const state=get();
     if(state?.songs && state?.currentMusic) {
-      const newIndex=Math.abs(state.currentMusic.index+action)%(state.songs.length);
+      const newIndex=state.currentMusic.index+action;
       set({ 
-        currentMusic: state.songs[newIndex],
+        currentMusic: state.songs[newIndex < 0 ? state.songs.length-1 : newIndex%state.songs.length],
         currSongIndex: newIndex,
         playSong: true,
       });
