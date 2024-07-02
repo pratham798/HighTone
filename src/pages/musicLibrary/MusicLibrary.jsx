@@ -5,7 +5,7 @@ import Playlist from './components/playlist';
 import HeaderNav from '../../components/headerNav';
 import SongPlay from './components/songPlay';
 
-const MusicPlayer = () => {
+const MusicLibrary = () => {
   const { songs, currentMusic, isError, isLoading, fetchMusic, currBackground, filteredSongs } = useMusicStore((state)=>({
     songs: state.songs,
     currentMusic: state.currentMusic,
@@ -37,4 +37,4 @@ const MusicPlayer = () => {
   )
 }
 
-export default MusicPlayer;
+export default MusicLibrary;

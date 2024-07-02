@@ -1,9 +1,9 @@
-import MusicPlayer from "./musicPlayer";
+import MusicLibrary from "./musicLibrary";
 
 const App = () => {
   return (
     <section>
-      <MusicPlayer />
+      <MusicLibrary />
     </section>
   );
 }
