@@ -4,13 +4,14 @@ import { shallow } from "zustand/shallow";
 import SearchIcon from '../../../../assets/search.svg';
 import Song from '../song';
 import SearchSong from '../searchSong';
+import LoadingState from './LoadingState';
 
 const Playlist = ({songs, isLoading}) => {
   const { setFilterSongs } = useMusicStore((state)=>({setFilterSongs: state.setFilterSongs}), shallow);
   const filterSongList = (action) => setFilterSongs('top_track', top_track => top_track === action);
 
   return (
-    <section className='flex flex-col gap-8 pt-8 max-lg: p-7 max-lg:order-2 lg:max-w-[27rem] min-w-80 flex-1'>
+    <section className='flex flex-col gap-8 pt-8 max-lg:p-7 max-lg:order-2 min-w-80 flex-1'>
       <header className='flex flex-row gap-10 text-slate-100 font-extrabold text-2xl'>
         <span className='cursor-pointer opacity-35 hover:opacity-100' onClick={()=>filterSongList(null)}>
             For You
@@ -24,6 +25,7 @@ const Playlist = ({songs, isLoading}) => {
         <img className='size-8 inline-block ml-auto mr-2' src={SearchIcon} alt='cover'/>
       </section>
       <section className='flex flex-col gap-4'>
+        {isLoading && (Array.from({ length: 7 }, (_, index) => <LoadingState key={index} />))}
         {songs?.map((song) => {
           return(
             <Song 

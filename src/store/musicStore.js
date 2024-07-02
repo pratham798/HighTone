@@ -13,7 +13,10 @@ export const useMusicStore = create((set) => ({
     try {
       const res = await fetch('https://cms.samespace.com/items/songs');
       const musicData = await res.json();
-      set({songs: musicData.data});
+      set({
+        songs: musicData.data,
+        isLoading: false,
+      });
     } catch (error) {
       set({isError: true});
     }

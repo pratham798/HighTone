@@ -25,13 +25,11 @@ const MusicLibrary = () => {
   };
 
   return (
-    <section style={gradientStyle} className='flex flex-row max-lg:flex-col w-full relative'>
-      <HeaderNav/>
-      <section className='flex flex-row gap-10 max-lg:flex-col lg:gap-8 w-full flex-1 relative'>
+    <section style={gradientStyle}>
+      <section className='flex flex-row max-lg:flex-col max-w-screen-2xl mx-auto relative'>
+        <HeaderNav/>
         <Playlist songs={filteredSongs.length ? filteredSongs : songs} isLoading={isLoading} isError={isError}/>
-        <section className='flex flex-col items-center lg:mt-20 flex-1 lg:sticky h-max lg:top-[10%]'>
-          <SongPlay/>
-        </section>
+        <SongPlay/>
       </section>
     </section>
   )

@@ -1,11 +1,7 @@
 import MusicLibrary from "./musicLibrary";
 
 const App = () => {
-  return (
-    <section>
-      <MusicLibrary />
-    </section>
-  );
+  return <MusicLibrary />
 }
 
 export default App;
