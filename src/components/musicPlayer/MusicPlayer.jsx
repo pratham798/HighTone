@@ -19,6 +19,7 @@ const MusicPlayer = () => {
     muteUnmuteSong: state.muteUnmuteSong,
   }), shallow);
   const audioElem = useRef();
+  const clickRef = useRef();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -44,11 +45,18 @@ const MusicPlayer = () => {
     const ct = audioElem.current.currentTime;
     setProgress(ct / duration * 100);
   }
+  const updateProgress = (e) => {
+    const barWidth = clickRef.current.clientWidth;
+    const offset = e.nativeEvent.offsetX;
+    const divprogress = offset / barWidth * 100;
+    audioElem.current.currentTime = divprogress / 100 * audioElem.current.duration;
+  }
 
   return (
     <section>
       <audio src={currentMusic?.url} ref={audioElem} onTimeUpdate={currentMusic && updateTime}/>
-      <section className='bg-slate-300 w-full h-[0.3rem] bg-opacity-10 mb-2'>
+      <section className='bg-slate-300 w-full h-[0.3rem] bg-opacity-10 mb-2' 
+        onClick={(e) => currentMusic && updateProgress(e)} ref={clickRef}>
         <div className='bg-slate-50 h-1 transition-all' style={{width: `${progress+"%"}`}} />
       </section>
       <section className='flex flex-row gap-6 justify-between px-2 items-center'>
