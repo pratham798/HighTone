@@ -8,6 +8,7 @@ export const useMusicStore = create((set, get) => ({
   isError: false,
   isLoading: true,
   playSong: false,
+  muted: false,
 
   fetchMusic: async() => {
     try {
@@ -48,4 +49,7 @@ export const useMusicStore = create((set, get) => ({
       });
     }
   },
+  muteUnmuteSong: (action) => set((state) => ({
+    muted: state?.currentMusic && action
+  })),
 }));
